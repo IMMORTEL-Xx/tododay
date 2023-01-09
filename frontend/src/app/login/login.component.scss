@@ -1,0 +1,14 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card {
+    margin-top: 200px;
+    padding: 40px;
+    width: 350px;
+}
+
+mat-card-content{
+    padding: 0;
+}
