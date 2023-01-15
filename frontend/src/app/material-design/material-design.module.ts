@@ -8,6 +8,10 @@ import { MatInputModule } from "@angular/material/input"
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { MatCardModule } from "@angular/material/card"
 import { MatDividerModule } from '@angular/material/divider'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core'
+
+
 
 @NgModule({
   declarations: [],
@@ -21,7 +25,9 @@ import { MatDividerModule } from '@angular/material/divider'
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialDesignModule { }

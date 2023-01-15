@@ -20,7 +20,7 @@ const taskController = {
     },
     getAll: async (req, res) => {
         try{
-            const tasks = await taskService.getAll(req.user.id)
+            const tasks = await taskService.getAll() // getAll(req.user.id)
             res.status(200).json(tasks)
         }
         catch(err){

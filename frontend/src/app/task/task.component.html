@@ -1,0 +1,16 @@
+
+<button (click)="picker.open()">
+    <h1>{{ date | date: 'EEEE, dd MMMM, yyyy'}}</h1>
+</button>
+<mat-form-field appearance="fill">
+  <mat-label>Value binding</mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="date">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<button (click)="changeDate()">CHANGER DATE</button>
+<router-outlet></router-outlet>
+<!-- <div *ngIf="tasks">
+    <h1 *ngFor="let task of tasks">{{task.nom + " "+ task.user}}</h1>
+</div> -->

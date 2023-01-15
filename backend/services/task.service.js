@@ -19,9 +19,11 @@ async function addOne(task){
     return newTask._id
 }
 
-async function getAll(userId){
-    const user = await User.findById(userId).populate("tasks", "nom description -_id")
-    return user.tasks
+async function getAll(){ //getAll(userId)
+    const tasks = await Task.find()
+    return tasks
+    //const user = await User.findById(userId).populate("tasks", "nom description -_id")
+    // return user.tasks
 }
 
 module.exports = {
