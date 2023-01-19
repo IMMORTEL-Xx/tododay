@@ -12,24 +12,54 @@ import { FormControl } from '@angular/forms';
 export class TaskComponent implements OnInit {
 
   tasks!: Task[];
-  
-  date = new FormControl(new Date()).value;
-  date1 = new Date();
+  timeLeft!: string;
+  showCalendar = false;
+
+  date = new Date();
+  today = this.date.getDate();
   
   constructor(private taskService: TaskService){}
 
+
   ngOnInit() : void{
     this.taskService.getAllTasks().subscribe((res: any) =>{
-      console.log(res)
-      this.tasks = res
+      console.log(res);
+      this.tasks = res;
     });
+    this.timeLeftMidnight();
   }
 
-  changeDate() {
-    console.log(this.date);
-    // let newDate = new Date("2000-01-12T00:00:00");
-    // this.date.setValue(newDate);
-    // console.log(this.date.value);
+  timeLeftMidnight(){
+    const currentHour = this.date.getHours();
+    const currentMinutes = this.date.getMinutes();
+
+    const hoursLeft = 23 - currentHour;
+    const minutesLeft = 60 - currentMinutes;
+
+    if(minutesLeft < 60){
+      this.timeLeft = `${hoursLeft} h ${minutesLeft} m`;
+    }
+    else{
+      this.timeLeft = `${hoursLeft} h`;
+    }
+  }
+
+  set dateSelected(value : Date) {
+    
+    if(value.getDate() != this.today ){
+      this.timeLeft = "24 h"
+      this.date = value;
+      // this.timeLeft = new Date( 24, 0, 0).toString();
+    }
+    else{
+      this.date = new Date();
+      this.timeLeftMidnight();
+    }
+    this.showCalendar = !this.showCalendar;
+  }
+
+  addTask(){
+    
   }
 
   
