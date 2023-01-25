@@ -1,9 +1,35 @@
-.calendar{
-    width: 700px;
+button{
+    font-size: 20px;
 }
 
-.time{
-    
-    background-color:mediumpurple;
-    
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-card {
+    width: 700px;
+}
+  
+/* Ajoutez une marge entre les éléments du formulaire */
+mat-form-field, button {
+    margin: 10px;
+}
+
+textarea
+{
+ resize : none;
+}
+
+/* Ajoutez une bordure aux boutons lorsqu'ils sont survolés */
+button:hover {
+    border: 2px solid #007bff;
+}
+
+mat-card-content{
+    padding: 0;
+}
+
+.textForm{
+    margin: 10px;
 }

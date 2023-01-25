@@ -3,6 +3,14 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
 .flex {
     display: flex;
 }
@@ -13,4 +21,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 .m-auto {
     margin: auto;
+}
+
+.error{
+    color: red;
 }

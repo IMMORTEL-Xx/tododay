@@ -16,7 +16,7 @@
  app.use("/user", userRouter)
  app.use("/task", taskRouter)
 
- app.get("/hello", authMiddleware, (req, res)=>{
+ app.get("/hello", (req, res)=>{
     res.json({message: 'Hello'})
  })
 

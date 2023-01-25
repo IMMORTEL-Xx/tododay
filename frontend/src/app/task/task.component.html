@@ -1,25 +1,30 @@
-<button class="calendar" (click) = "showCalendar = !showCalendar" >
-    <h1>{{ date | date: 'EEEE, dd MMMM, yyyy'}}</h1>
-    <h1>{{ today }}</h1>
-</button>
-<mat-card *ngIf="showCalendar" class="calendar">
-<mat-calendar [(selected)]="dateSelected"></mat-calendar>
-</mat-card>
-<div>
-  <h1 class="time">{{date | date: 'HH:mm'}} </h1><!-- ajouter icone temps -->
-  <button class="calendar" (click)="addTask()"><h1>{{timeLeft}}</h1></button><!-- ajouter icone sablier -->
-  <h1 class="time">00:00</h1><!-- ajouter icone demi lune -->
+<div class="flex">
+  <div class="m-auto">
+    <mat-card>
+      <form [formGroup]="taskFormGroup">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Task</mat-label>
+          <input matInput formControlName="name" 
+              class="form-control" placeholder="Enter Task name" required/>
+        </mat-form-field> 
+        <div class="textForm">
+          Heure de debut<input type="time" formControlName="start" required>
+
+          Heure de fin<input type="time" formControlName="end" required>
+        </div >
+        <mat-form-field>
+          <textarea matInput formControlName="description" placeholder="Description"></textarea>
+        </mat-form-field>
+        <div class="textForm error" color="primary" *ngIf=" submitted && taskFormGroup.invalid">
+          Invalid form
+        </div>
+        <button type="submit" (click)="onSubmitForm()" mat-raised-button>Valider</button>
+      </form>
+    </mat-card>
+  </div>
 </div>
-
-<!-- <mat-form-field appearance="fill">
-  <mat-label>Value binding</mat-label>
-  <input matInput [matDatepicker]="picker" [(ngModel)]="date">
-  <mat-hint>MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-<button (click)="changeDate()">CHANGER DATE</button> -->
-
-<!-- <div *ngIf="tasks">
-    <h1 *ngFor="let task of tasks">{{task.nom + " "+ task.user}}</h1>
-</div> -->
