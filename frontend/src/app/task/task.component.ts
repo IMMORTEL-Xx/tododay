@@ -29,11 +29,11 @@ export class TaskComponent implements OnInit {
   onSubmitForm(){
     this.submitted = true;
     if(this.taskFormGroup.valid){
-      console.log(this.taskFormGroup.value)
-      this.router.navigate(["profil"])
+      console.log(this.taskFormGroup.value);
+      this.router.navigate(["profil"]);
     }
     else{
-      console.log("Invalid form")
+      console.log("Invalid form");
     }
   }
 }

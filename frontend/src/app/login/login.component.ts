@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   urlRegex!: RegExp;
   userFormGroup!: FormGroup;
   submitted = false;
+  hide = true;
+  keyPress = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -50,4 +52,23 @@ export class LoginComponent implements OnInit {
       console.log("Invalid form")
     }
   }
+
+  onEnterLogin(event: Event) {
+      event.preventDefault();
+      this.onLogin();
+  }
+
+  keyDown(event: Event) {
+    this.hide = true;
+    event.preventDefault();
+    this.keyPress = true;
+  }
+
+  keyUp() {
+    this.hide = true;
+    if (this.keyPress) {
+        this.onLogin();
+        this.keyPress = false;
+    }
+}
 }

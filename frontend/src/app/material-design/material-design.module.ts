@@ -10,6 +10,7 @@ import { MatCardModule } from "@angular/material/card"
 import { MatDividerModule } from '@angular/material/divider'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
+import { MatIconModule } from '@angular/material/icon'
 
 
 
@@ -27,7 +28,8 @@ import { MatNativeDateModule } from '@angular/material/core'
     MatCardModule,
     MatDividerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatIconModule
   ]
 })
 export class MaterialDesignModule { }

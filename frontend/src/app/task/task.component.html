@@ -2,7 +2,7 @@
   <div class="m-auto">
     <mat-card>
       <form [formGroup]="taskFormGroup">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose date" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
