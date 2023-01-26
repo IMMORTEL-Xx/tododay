@@ -8,8 +8,23 @@ button[type='submit'] {
   height: 50px;
 }
 
-mat-error{
-  display: block;
+mat-hint{
+  color: red;
+  font-size: 16px;
+}
+
+mat-form-field:first-child{
+  padding-bottom: 15px;
+}
+
+mat-form-field {
+  mat-error {
+      display: none !important;
+  }
+
+  mat-error:first-child {
+      display: block !important;
+  }
 }
 
 .mat-mdc-form-field-bottom-align::before {

@@ -22,6 +22,7 @@ export class RegisterComponent {
   hide2 = true;
   keyPress = false;
   emailExist = false;
+  //errorMsg: string = "Email is already registred"
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -33,7 +34,8 @@ export class RegisterComponent {
         email: [null, [Validators.required, Validators.pattern(this.urlRegex)]],
         password: [null, [Validators.required, Validators.minLength(3)]],
         confirmPassword: [null, [Validators.required]]
-      },{
+      }
+      ,{
         validator : this.matchValidator('password', 'confirmPassword')
       }
     );
@@ -47,21 +49,18 @@ export class RegisterComponent {
     if (this.registerFormGroup.valid) {
       this.registerService.register(this.registerFormGroup.value).subscribe(
         {
-          next: (data: any) => {
+          next: () => {
             console.log("okok");
-            console.log(data);
             this.router.navigate(["login"]);
           },
-          error: (err: Error) => {
+          error: () => {
             this.emailExist = true;
-            console.log("email exist" + this.emailExist);
-            console.log(err);
-            this.emailInput.nativeElement.focus();
+            setTimeout(() => { this.emailExist = false; console.log("coucou") }, 2000);
+            console.log("email exist " + this.emailExist);
           }
         }
       );
       console.log(this.registerFormGroup.value);
-      
     }
     else {
       console.log("Invalid form");
@@ -82,6 +81,23 @@ export class RegisterComponent {
       }
       else{
         confirmPasswordCtrl.setErrors(null);
+      }
+    }
+  }
+
+  existValidator(email: string){
+    return (formGroup: FormGroup) => {
+      const emailCtrl = formGroup.controls[email];
+
+      if(emailCtrl.errors) {
+        return
+      }
+
+      if(this.emailExist) {
+        emailCtrl.setErrors({existValidator: true})
+      }
+      else{
+        emailCtrl.setErrors(null);
       }
     }
   }

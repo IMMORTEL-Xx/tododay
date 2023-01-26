@@ -12,8 +12,8 @@ export class RegisterService {
   private url : string = environment.url;
   constructor(private http: HttpClient) { }
 
-  register(user: any): Observable<User> { {
-      return this.http.post<any>(this.url+"user/register", user);
-    }
+  register(user: User): Observable<User> { 
+      return this.http.post<User>(this.url+"user/register", user);
+    
   }
 }

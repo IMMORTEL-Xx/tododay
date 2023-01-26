@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   hide = true;
   keyPress = false;
+  userNotExist = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -42,7 +43,11 @@ export class LoginComponent implements OnInit {
             this.tokenService.saveToken(data.token);
             this.router.navigate(['day']);
           },
-          error: (err: Error) => console.log(err)
+          error: (err: Error) =>{
+            console.log(this.userNotExist),
+            this.userNotExist = true,
+            console.log(this.userNotExist)
+          }
         }
       );
       console.log(this.userFormGroup.value);
@@ -52,6 +57,8 @@ export class LoginComponent implements OnInit {
       console.log("Invalid form")
     }
   }
+
+  get f() { return this.userFormGroup.controls; }
 
   onEnterLogin(event: Event) {
       event.preventDefault();
