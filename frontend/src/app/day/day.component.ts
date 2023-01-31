@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from '../models/task.model'
 import { TaskService } from '../services/task.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-day',
@@ -10,22 +13,37 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./day.component.scss']
 })
 export class DayComponent implements OnInit {
-
-  tasks!: Task[];
+  // @Output('cdkDropDropped')
+  // dropped: EventEmitter<CdkDragDrop<any, any>> =
+  //   new EventEmitter<CdkDragDrop<any, any>>();
+  
+  items = [
+    'Item 0',
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+    'Item 6',
+    'Item 7',
+  ]
+  
+  taskList!: Task[];
+  taskListByDay!: Task[];
   timeLeft!: string;
   showCalendar = false;
 
   date = new Date();
   today = this.date.getDate();
+  options = {year: 'numeric', day: 'numeric', month: 'numeric'};
   
-  constructor(private taskService: TaskService){}
+  constructor(private taskService: TaskService,
+              private datePipe: DatePipe){}
 
   ngOnInit() : void{
-    this.taskService.getAllTasks().subscribe((res: any) =>{
-      console.log(res);
-      this.tasks = res;
-      console.log(this.tasks);
-    });
+    console.log(this.datePipe.transform(this.date, "yyyy-MM-dd"));
+    this.getAllTasks();
+    this.getAllTasksByDay();
     this.timeLeftMidnight();
   }
 
@@ -46,21 +64,34 @@ export class DayComponent implements OnInit {
 
   set dateSelected(value : Date) {
     
-    if(value.getDate() != this.today ){
+    if(value.getDate() == this.today ){
+      this.date = new Date();
+      this.timeLeftMidnight();
+    }
+    else{
       this.timeLeft = "24 h"
       this.date = value;
       // this.timeLeft = new Date( 24, 0, 0).toString();
     }
-    else{
-      this.date = new Date();
-      this.timeLeftMidnight();
-    }
     this.showCalendar = !this.showCalendar;
   }
 
-  addTask(){
-    
+  getAllTasks(){
+    this.taskService.getAllTasks().subscribe((res: any) =>{
+      this.taskList = res;
+      console.log(this.taskList);
+    });
+  }
+  
+  getAllTasksByDay(){
+    this.taskService.getAllTasksByDay(this.datePipe.transform(this.date, "yyyy-MM-dd")).subscribe((res: any) =>{
+      this.taskListByDay = res;
+      console.log(this.taskListByDay);
+    });
   }
 
-  
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.taskListByDay, event.previousIndex, event.currentIndex);
+  }
+
 }

@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskComponent } from './task/task.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TokenInterceptorProvider } from './interceptors/token.interceptor';
+
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [TokenInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

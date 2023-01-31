@@ -11,6 +11,8 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
 import { MatIconModule } from '@angular/material/icon'
+import { DatePipe } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -19,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon'
   imports: [
     CommonModule
   ],
+  providers: [DatePipe],
   exports: [
     MatButtonModule,
     MatToolbarModule,
@@ -29,7 +32,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    DragDropModule
   ]
 })
 export class MaterialDesignModule { }

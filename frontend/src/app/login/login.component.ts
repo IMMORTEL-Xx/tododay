@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.urlRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$/
     this.userFormGroup = this.fb.group({
         email: [null, [Validators.required, Validators.pattern(this.urlRegex)]],
-        password: [null, [Validators.required,Validators.minLength(3)]],
+        password: [null, [Validators.required]],
     });
   }
   
@@ -39,14 +39,11 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.userFormGroup.value).subscribe(
         {
           next: (data: any) => {
-            console.log(data.token);
             this.tokenService.saveToken(data.token);
             this.router.navigate(['day']);
           },
           error: (err: Error) =>{
-            console.log(this.userNotExist),
-            this.userNotExist = true,
-            console.log(this.userNotExist)
+            this.userNotExist = true
           }
         }
       );

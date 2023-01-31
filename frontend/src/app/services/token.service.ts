@@ -13,7 +13,10 @@ export class TokenService {
 
   isLogged(): boolean {
     const token = localStorage.getItem('token');
-    console.log(token);
     return !! token;
+  }
+
+  getToken(): string | null{
+    return localStorage.getItem('token');
   }
 }

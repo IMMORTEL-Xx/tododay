@@ -12,7 +12,7 @@ async function register(data) {
 
 async function login(email, password) {
     const currentUser = await User.findOne({ email })
-    console.log(currentUser)
+    //console.log(currentUser)
     
     if (currentUser) {
         try {

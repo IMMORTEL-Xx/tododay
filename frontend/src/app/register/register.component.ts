@@ -55,7 +55,7 @@ export class RegisterComponent {
           },
           error: () => {
             this.emailExist = true;
-            setTimeout(() => { this.emailExist = false; console.log("coucou") }, 2000);
+            setTimeout(() =>  this.emailExist = false , 4000);
             console.log("email exist " + this.emailExist);
           }
         }

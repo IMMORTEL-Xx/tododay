@@ -2,7 +2,7 @@
 	<div class="m-auto">
 		<mat-card>
 			<mat-card-title>
-				Login
+				Welcome!
 			</mat-card-title>
 
 			<mat-card-content>
@@ -29,7 +29,7 @@
 						<button mat-icon-button matSuffix (click)="this.hide = !this.hide">
 							<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 						</button>
-						<mat-error *ngIf=" f['password'].errors?.['required']" >
+						<mat-error *ngIf=" f['password'].errors?.['required'] && !userNotExist" >
               Password is required
             </mat-error>
 						<mat-hint *ngIf=" submitted && userNotExist">
@@ -45,6 +45,7 @@
 				<button type="submit" (click)="onLogin()" color="primary" mat-raised-button>Login
 				</button>
 			</mat-card-actions>
+			<a routerLink="/register">New user? Start here.</a>
 		</mat-card>
 	</div>
 </div>

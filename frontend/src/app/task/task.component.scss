@@ -11,6 +11,7 @@ label {
   margin-bottom: 10px;
   display: block;
 }
+
 input[type="text"], input[type="date"], input[type="time"], textarea {
   width: 100%;
   padding: 12px 20px;
@@ -20,6 +21,7 @@ input[type="text"], input[type="date"], input[type="time"], textarea {
   border-radius: 4px;
   font-size: 16px;
   resize: vertical;
+  resize: none;
 }
 input[type="text"]:focus, input[type="date"]:focus, input[type="time"]:focus, textarea:focus {
   border-color: #3498db;
@@ -40,3 +42,4 @@ button[type="submit"] {
 button:hover {
   border: 2px solid white;
 }
+
