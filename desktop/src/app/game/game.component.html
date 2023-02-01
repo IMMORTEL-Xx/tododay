@@ -1,0 +1,27 @@
+<!-- <div id="play">
+    <button *ngIf="!playing" (click) = "playing = true; start();">JOUER</button>
+</div> -->
+<figure [style.height.px]="90">
+  <img #coin [style.height.px]="coinHeight" src="" style="display:none;">
+</figure>
+<div class="progress-container">
+  <div class="progress" [style.width]="progress.toString()+'%'">{{time}}</div>
+</div>
+<div class="button-wrapper">
+  <button (click)="addDistraction()" class="button-82-pushable" role="button">
+    <span class="button-82-shadow"></span>
+    <span class="button-82-edge"></span>
+    <span class="button-82-front">
+      Distraction
+    </span>
+  </button>
+</div>
+<div class="button-wrapper">
+  <button class="button-82-pushable" role="button">
+    <span class="button-82-shadow"></span>
+    <span class="button-82-edge"></span>
+    <span class="button-82-front">
+      Boost
+    </span>
+  </button>
+</div>

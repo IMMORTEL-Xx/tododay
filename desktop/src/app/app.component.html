@@ -1,3 +1,13 @@
+<app-header *ngIf="router.url !== '/game'"></app-header>
+<div class="content" [style.background-color]="router.url !== '/game' ? 'lightblue' : 'transparent'">
+  <div class="flex">
+    <div class="m-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- 
 <div id="play">
     <button *ngIf="!playing" (click) = "playing = true; start();">JOUER</button>
 </div>
@@ -26,4 +36,4 @@
           </span>
         </button>
     </div>
-</div>
+</div> -->

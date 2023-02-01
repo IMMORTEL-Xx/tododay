@@ -1,5 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0;
-    padding: 0;
+//$color: lightblue;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+
+.center-vertical {
+  transform: translate(0%, -50%);
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  position: absolute;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.error {
+  color: red;
+}
+
+a {
+  padding-top: 20px;
+}
+
+mat-card {
+  margin-top: 100px;
+  padding: 40px;
+  width: 450px;
+  background-color: lightblue;
+}
+
+
+mat-card-content {
+  padding: 0;
+}
+
+mat-card-title {
+  padding-bottom: 20px;
+}
+
+mat-label {
+  font-size: larger;
+}
+
+mat-error {
+  font-size: 16px;
+}
+
+.mdc-button__label {
+  font-size: 18px;
 }
