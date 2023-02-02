@@ -1,5 +1,5 @@
-<app-header *ngIf="router.url !== '/game'"></app-header>
 <div class="content" [style.background-color]="router.url !== '/game' ? 'lightblue' : 'transparent'">
+  <app-header *ngIf="router.url !== '/game'"></app-header>
   <div class="flex">
     <div class="m-auto">
       <router-outlet></router-outlet>

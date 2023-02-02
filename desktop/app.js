@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain, screen, document} = require('electron');
+const {app, BrowserWindow, ipcMain, screen} = require('electron');
 const url = require("url");
 const path = require('path');
 
@@ -9,16 +9,15 @@ let screenWidth;
 let screenHeight;
 let mainWidth = 750;
 let mainHeight = 700;
-let gameWidth = 300;
-let gameHeight = 200;
+let gameWidth = 116;
+let gameHeight = 230; //attention décimales et impaire crée erreur
 
 function createMainWindow () {
-  // screenWidth = screen.getPrimaryDisplay().size.width;
-  // screenHeight = screen.getPrimaryDisplay().size.height;
+  
   win = new BrowserWindow({
-  frame: false,
+  // frame: false,
   transparent:true,
-  //titleBarStyle: 'hidden',
+  titleBarStyle: 'hidden',
   width: mainWidth,
   height: mainHeight,
   // minWidth: mainWidth,
@@ -46,12 +45,18 @@ function setMainWindow () {
   screenWidth = screen.getPrimaryDisplay().size.width;
   screenHeight = screen.getPrimaryDisplay().size.height;
 
-  win.frame = true;
-  win.transparent = true;
-  win.titleBarStyle = 'hidden';
   win.setContentSize(gameWidth, gameHeight);
   win.setPosition(screenWidth - gameWidth, (screenHeight - gameHeight)/2);
   
+  
+  //gameWindow.webContents.openDevTools();
+  win.setAlwaysOnTop(true, "screen-saver");
+  win.setVisibleOnAllWorkspaces(true);
+}
+
+function setGameWindow () {
+  win.setContentSize(mainWidth, mainHeight);
+  win.setPosition(350, 20);
   
   //gameWindow.webContents.openDevTools();
   win.setAlwaysOnTop(true, "screen-saver");
@@ -62,7 +67,9 @@ function setMainWindow () {
 app.whenReady().then(() => {
   ipcMain.on('set-title', handleSetTitlee);
   ipcMain.on('set-x', handleSetXPosition);
-  ipcMain.on('close-windows', handleCloseWindows);
+  ipcMain.on('set-main-windows', setMainWindow);
+  ipcMain.on('set-game-windows', setGameWindow);
+  
   createMainWindow();
   win.focus();
   //win.setIgnoreMouseEvents(true);
@@ -89,8 +96,16 @@ function handleSetXPosition (event, x) {
 }
 
 //win.methode appartient à electron, c'est pas une méthode que j'ai créé
-function handleCloseWindows (event) {
-  const webContents = event.sender;
-  const win = BrowserWindow.fromWebContents(webContents);
-  setMainWindow();
-}
+// function handleCloseWindows (event) {
+//   const webContents = event.sender;
+//   const win = BrowserWindow.fromWebContents(webContents);
+//   setMainWindow();
+// }
+
+// function handleReopenWindow (event) {
+//   const webContents = event.sender;
+//   const win = BrowserWindow.fromWebContents(webContents);
+//   setGameWindow();
+// }
+
+

@@ -3,5 +3,6 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('electronAPI', {
     setTitle: (title) => ipcRenderer.send('set-title', title),
     setXPosition: (x) => ipcRenderer.send('set-x', x),
-    closeWindows: () => ipcRenderer.send('close-windows'),
+    closeWindows: () => ipcRenderer.send('set-main-windows'),
+    setWindows: () => ipcRenderer.send('set-game-windows'),
 })

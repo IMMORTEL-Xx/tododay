@@ -81,10 +81,7 @@ export class DayComponent implements OnInit {
     moveItemInArray(this.taskListByDay, event.previousIndex, event.currentIndex);
   }
 
-  //ELECTRON binding
-  closeWindows(){
-    window.electronAPI.closeWindows();
-  }
+  
 
   // changeTitle(): void {
   //   window.electronAPI.setTitle("VAMOS A LA PLAYA");

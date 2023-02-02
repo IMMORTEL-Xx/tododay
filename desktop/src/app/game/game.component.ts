@@ -1,11 +1,12 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent {
+export class GameComponent implements OnDestroy{
+  //prendre la référence de l'élement de la balise image #coin
   @ViewChild('coin') gifElement!: ElementRef;
 
   audio = new Audio();
@@ -17,10 +18,11 @@ export class GameComponent {
   sec: number = 0;
   min: number = 0;
   zeroSec: string = "0";
-  coinSec: number = 300;
+  coinSec: number = 5; //300
   secModulo!: number;
   progress: number = 0;
   progressSec: number = 100/this.coinSec;
+  coinInterval: any;
 
   ngOnInit(): void {
     this.audio.src = './assets/coinSound.mp3';
@@ -61,9 +63,17 @@ export class GameComponent {
   }
 
   start(){
-    setInterval(()=>{
+    this.coinInterval = setInterval(()=>{
       this.changeProgress();
     }, (1000))
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.coinInterval);
+  }
+
+  stop(){
+
   }
 
 
@@ -74,5 +84,9 @@ export class GameComponent {
 
   addDistraction(){
     console.log("dac");
+  }
+
+  onSetWindows(){
+    window.electronAPI.setWindows();
   }
 }

@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
   
   ngOnInit(): void {
     this.taskFormGroup = this.fb.group({
-        date: [null, [Validators.required]],
+        date: ['2023-02-02', [Validators.required]],
         name: [null, [Validators.required]],
         description: [null]
     });
@@ -45,5 +45,10 @@ export class TaskComponent implements OnInit {
     else{
       console.log("Invalid form");
     }
+  }
+
+  //ELECTRON binding
+  changeWindows(){
+    window.electronAPI.closeWindows();
   }
 }

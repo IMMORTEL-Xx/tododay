@@ -26,50 +26,6 @@ form div{
   width: 50%;
 }
 
-input[type="text"], textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: vertical;
-  resize: none;
-}
-
-input[type="text"]:focus, input[type="date"]:focus, input[type="time"]:focus, textarea:focus {
-  border-color: #3498db;
-  outline: none;
-}
-
-button[routerlink="/task"] {
-  width: 50%;
-  height: 50px;
-  padding: 14px 20px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-button[routerlink="/task"]:hover {
-  border: 2px solid #B22222;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-}
-
-button {
-  margin: auto;
-  display: block;
-}
 
 .date, .datePicker, .task {
     margin-top: 30px;
@@ -90,3 +46,54 @@ img[alt="todolist"]{
     height: 30px;
 }
 
+
+//ANGULAR DRAG&DROP
+
+.example-list {
+  width: 100%;
+  max-width: 100%;
+  border: solid 1px #ccc;
+  min-height: 60px;
+  display: block;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
