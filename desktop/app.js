@@ -35,7 +35,7 @@ function createMainWindow () {
 
   win.loadFile(path.join(__dirname, "/dist/test-desktop-electron-app/index.html"));
   
-  win.webContents.openDevTools(true);
+  win.webContents.openDevTools();
   // win.setAlwaysOnTop(true, "screen-saver");
   // win.setVisibleOnAllWorkspaces(true);
   win.show();
@@ -47,7 +47,7 @@ function setMainWindow () {
 
   win.setContentSize(gameWidth, gameHeight);
   win.setPosition(screenWidth - gameWidth, (screenHeight - gameHeight)/2);
-  
+  console.log("arrive to main windows");
   
   //gameWindow.webContents.openDevTools();
   win.setAlwaysOnTop(true, "screen-saver");
@@ -57,7 +57,7 @@ function setMainWindow () {
 function setGameWindow () {
   win.setContentSize(mainWidth, mainHeight);
   win.setPosition(350, 20);
-  
+  console.log("stoppp");
   //gameWindow.webContents.openDevTools();
   win.setAlwaysOnTop(true, "screen-saver");
   win.setVisibleOnAllWorkspaces(true);

@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TokenInterceptorProvider } from './interceptors/token.interceptor';
 import { GameComponent } from './game/game.component';
+import { TimePipe } from './pipes/time.pipe';
 
 
 
@@ -30,7 +31,8 @@ import { GameComponent } from './game/game.component';
     TaskComponent,
     RegisterComponent,
     NotFoundComponent,
-    GameComponent
+    GameComponent,
+    TimePipe
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
@@ -10,6 +10,7 @@ import { TaskService } from '../services/task.service';
 })
 export class TaskComponent implements OnInit {
 
+  datePiped!: string | null;
   urlRegex!: RegExp;
   taskFormGroup!: FormGroup;
   submitted = false;
@@ -20,18 +21,24 @@ export class TaskComponent implements OnInit {
   
   ngOnInit(): void {
     this.taskFormGroup = this.fb.group({
-        date: ['2023-02-02', [Validators.required]],
+        date: [null, [Validators.required]],
+        start: [null, [Validators.required]],
+        end: [null, [Validators.required]],
         name: [null, [Validators.required]],
         description: [null]
     });
   }
 
+  get f() { return this.taskFormGroup.controls; }
+
   onAddTask(){
     this.submitted = true;
+    console.log(this.taskFormGroup.value);
     if(this.taskFormGroup.valid){
       this.taskService.addTask(this.taskFormGroup.value).subscribe(
         {
           next: () => {
+            console.log(this.taskFormGroup.value);
             console.log("Task added")
             this.router.navigate(["day"]);
           },
@@ -49,6 +56,19 @@ export class TaskComponent implements OnInit {
 
   //ELECTRON binding
   changeWindows(){
-    window.electronAPI.closeWindows();
+    console.log(this.taskService.getTime());
+    this.taskFormGroup.controls['start'].setValue(this.taskService.getTime());
+    this.taskFormGroup.controls['date'].setValue(this.taskService.getDatePiped());
+    this.taskFormGroup.controls['end'].setValue(0);
+    this.datePiped = this.taskService.getDatePiped();
+    if (this.taskFormGroup.valid){
+      this.taskService.setTaskFormGroup(this.taskFormGroup);
+      this.router.navigate(["game"]);
+      window.electronAPI.closeWindows();
+    }
+    else{
+      console.log("Invalid form");
+    }
+    
   }
 }

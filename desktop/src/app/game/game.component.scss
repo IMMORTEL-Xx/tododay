@@ -29,11 +29,12 @@ img {
   width: 112px;
   border-radius: 0.4rem;
   border: 1px solid black;
-  background: white
+  background: white;
+  display: flex;
+  justify-content: center; 
 }
 
-.progress-container .progress {
-  overflow: hidden;
+.progress {
   height: 100%;
   width: 0;
   font-size: 12px;
@@ -42,10 +43,9 @@ img {
   background: lightblue; //#fdd703 //#6200EE indigo color
   color: black;
   transition: width 0.4s ease;
-  text-align: right;
   display: flex;
+  justify-content: center; 
   align-items: center;
-  justify-content: flex-end;
 }
 
 .button-wrapper {
@@ -127,10 +127,10 @@ img {
   background: rgb(255, 128, 0);
 }
 
-
 .button-82-front,
 .button-82-front-2,
-.button-82-front-3{
+.button-82-front-3,
+.button-82-front-4{
   display: block;
   border-radius: 12px;
   font-size: 1.1rem;

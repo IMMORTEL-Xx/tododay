@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TimePipe } from '../pipes/time.pipe';
 
 
 
@@ -19,16 +20,18 @@ export class DayComponent implements OnInit {
   taskListByDay!: Task[];
   timeLeft!: string;
   showCalendar = false;
-
-  date = new Date();
-  today = this.date.getDate();
-  options = {year: 'numeric', day: 'numeric', month: 'numeric'};
+  date : Date = this.taskService.getDate();
+  today : number = this.date.getDate();
+  datePiped!: string | null;
   
-  constructor(private taskService: TaskService,
-              private datePipe: DatePipe){}
+  constructor(private taskService: TaskService){}
 
   ngOnInit() : void{
-    console.log(this.datePipe.transform(this.date, "yyyy-MM-dd"));
+    setInterval(() =>{
+      this.date = this.taskService.getDate();
+      this.today = this.date.getDate();
+    }, 1000);
+
     this.getAllTasks();
     this.getAllTasksByDay();
     this.timeLeftMidnight();
@@ -71,10 +74,22 @@ export class DayComponent implements OnInit {
   }
   
   getAllTasksByDay(){
-    this.taskService.getAllTasksByDay(this.datePipe.transform(this.date, "yyyy-MM-dd")).subscribe((res: any) =>{
+    this.datePiped = this.taskService.getDatePiped();
+    this.taskService.getAllTasksByDay(this.datePiped).subscribe((res: any) =>{
       this.taskListByDay = res;
       console.log(this.taskListByDay);
     });
+  }
+
+  getTimeElapsed(startTime: number, endTime: number){
+    // let startStr = startTime.toString();
+    // let endStr = endTime.toString();
+    // let hoursElapsed = parseInt(endStr.substring(0, 2)) - parseInt(startStr.substring(0, 2));
+    // let minutesElapsed = parseInt(endStr.substring(2, 4)) - parseInt(startStr.substring(2, 4));
+    // let secondsElapsed = parseInt(endStr.substring(4)) - parseInt(startStr.substring(4));
+    // console.log(hoursElapsed*10000 + minutesElapsed*10000 + secondsElapsed);
+    // return hoursElapsed*10000 + minutesElapsed*10000 + secondsElapsed;
+    return endTime - startTime;
   }
 
   drop(event: CdkDragDrop<string[]>) {

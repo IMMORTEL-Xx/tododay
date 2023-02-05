@@ -6,7 +6,7 @@ const userController = {
         try{
             await userService.register(req.body)
             res.status(201).json({
-                message: "User added"}) //201 = ça a été créé avec succès
+                message: "User added"}) 
         }
         catch(err){
             console.log(err.message)

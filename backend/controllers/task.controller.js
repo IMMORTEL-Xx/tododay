@@ -3,7 +3,6 @@ const taskService = require("../services/task.service")
 const taskController = {
     addOne: async(req, res) => {
         try{
-            console.log("dac")
             console.log(req.body)
             //requête arrive avec 'user' ajouté via le middleware
             //'req.body.user = req.user.id' crée et initilise 'req.body.user'

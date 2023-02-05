@@ -5,14 +5,12 @@ const jwt = require("jsonwebtoken");
 async function register(data) {
     const salt = await bcrypt.genSalt(10)
     data.password = await bcrypt.hash(data.password, salt)
-    // const newUser = new User(data)
-    // await newUser.save()
+
     await User.create(data)
 }
 
 async function login(email, password) {
     const currentUser = await User.findOne({ email })
-    //console.log(currentUser)
     
     if (currentUser) {
         try {

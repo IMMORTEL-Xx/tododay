@@ -5,11 +5,16 @@
   <div>
     <label>Task</label>
     <input type="text" formControlName="name" placeholder="Enter Task name" />
+    <p class="error" *ngIf=" f['name'].errors?.['required']">
+      Task name is required
+    </p>
   </div>
+  
+  
   <button type="submit" mat-raised-button color="primary">
     ADD TASK
   </button>
-  <button routerLink="/game" (click)="changeWindows()" mat-raised-button color="primary">
+  <button  type="submit" (click)="changeWindows()" mat-raised-button color="primary">
     START
   </button>
   <!-- (click)="onAddTask()" -->

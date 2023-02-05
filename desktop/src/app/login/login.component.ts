@@ -43,12 +43,11 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['day']);
           },
           error: (err: Error) =>{
-            this.userNotExist = true
+            console.log(err);
+            this.userNotExist = true;
           }
         }
       );
-      console.log(this.userFormGroup.value);
-      //this.router.navigate(["/task"]);
     }
     else{
       console.log("Invalid form")

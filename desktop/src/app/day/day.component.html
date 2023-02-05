@@ -8,7 +8,7 @@
   </div>
 
   <h1 class="time">
-    {{date | date: 'HH:mm '}}
+    {{date | date: 'HH:mm:ss '}}
     <img src="assets/clock.png" alt="clock">
   </h1>
 
@@ -28,11 +28,18 @@
   <h1>All tasks this day</h1>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let taskDay of taskListByDay" cdkDrag>
-    <h1>{{ taskDay.start }}</h1>
+    <h1>{{ taskDay.start | timePipe }}</h1>
     <h1>{{ taskDay.name }}</h1>
-    <h1>{{ taskDay.end }}</h1>
+    <h1>{{ getTimeElapsed(taskDay.start, taskDay.end) | timePipe}}</h1>
+    <h1>{{ taskDay.end | timePipe }}</h1>
   </div>
 </div>
+<!-- <div *ngFor="let taskDay of taskListByDay">
+  <h1>{{ taskDay.start | timePipe }}</h1>
+  <h1>{{ taskDay.name }}</h1>
+  <h1>{{ getTimeElapsed(taskDay.start, taskDay.end)}}</h1>
+  <h1>{{ taskDay.end | timePipe }}</h1>
+</div> -->
   <!-- <h1>All tasks this day</h1>
   <div>
     <div class="example-box" *ngFor="let taskDay of taskListByDay">
