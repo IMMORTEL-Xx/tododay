@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Task } from '../models/task.model';
 import { TaskService } from '../services/task.service';
@@ -50,7 +50,7 @@ export class GameComponent implements OnDestroy {
     if (this.sec >= this.coinSec) {
       this.audioCoin.play();
       this.runGif(this.srcCoin);
-
+      this.taskFormGroup.controls['coins'].setValue(this.taskFormGroup.controls['coins'].value + 1);
     }
     this.min = Math.floor(this.sec / 60);
     this.secModulo = this.sec % 60;
@@ -82,6 +82,9 @@ export class GameComponent implements OnDestroy {
   onAddDistraction() {
     this.audioArrow.play();
     this.runGif(this.srcArrow);
+    //(this.taskFormGroup.controls['distraction'] as FormArray).push(new Date());
+    this.taskFormGroup.get("distractions")?.value.push(new Date());
+    console.log("Distraction Added");
   }
 
   ngOnDestroy() {
@@ -90,8 +93,8 @@ export class GameComponent implements OnDestroy {
   }
 
   onAddTask() {
-    this.taskFormGroup.controls['end'].setValue(this.taskService.getTime());
-    
+    this.taskFormGroup.controls['end'].setValue(new Date());
+
     this.taskService.addTask(this.taskFormGroup.value).subscribe(
       {
         next: () => {

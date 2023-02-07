@@ -26,15 +26,14 @@ export class TaskService {
     return this.datePipe.transform(this.getDate(), "yyyy-MM-dd");
   }
   
-  getTime(){
-    let date = this.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    return hours*10000 + minutes*100 + seconds;
+  getTimee(){
+    // let date = this.getDate();
+    // let hours = date.getHours();
+    // let minutes = date.getMinutes();
+    // let seconds = date.getSeconds();
+    // return hours*10000 + minutes*100 + seconds;
+    return this.getDate();
   }
-
-  
 
   getAllTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.url + 'task')

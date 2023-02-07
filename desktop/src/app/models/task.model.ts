@@ -1,7 +1,9 @@
 export interface Task{
     date: Date;
     name: string;
-    start: number;
-    end: number;
+    start: Date;
+    end: Date;
+    distractions?: Array<Date>;
+    coins: number;
     description?: string;
 }

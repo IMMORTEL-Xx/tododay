@@ -10,7 +10,6 @@ import { TaskService } from '../services/task.service';
 })
 export class TaskComponent implements OnInit {
 
-  datePiped!: string | null;
   urlRegex!: RegExp;
   taskFormGroup!: FormGroup;
   submitted = false;
@@ -22,45 +21,22 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
     this.taskFormGroup = this.fb.group({
         date: [null, [Validators.required]],
-        start: [null, [Validators.required]],
-        end: [null, [Validators.required]],
         name: [null, [Validators.required]],
+        start: [null, [Validators.required]],
+        end: [null],
+        distractions: this.fb.array([]),
+        coins: [0],
         description: [null]
     });
   }
 
   get f() { return this.taskFormGroup.controls; }
 
-  onAddTask(){
-    this.submitted = true;
-    console.log(this.taskFormGroup.value);
-    if(this.taskFormGroup.valid){
-      this.taskService.addTask(this.taskFormGroup.value).subscribe(
-        {
-          next: () => {
-            console.log(this.taskFormGroup.value);
-            console.log("Task added")
-            this.router.navigate(["day"]);
-          },
-          error: () => {
-            console.log("Il y a une erreur lié à la requete")
-          }
-        }
-      );
-      console.log(this.taskFormGroup.value);
-    }
-    else{
-      console.log("Invalid form");
-    }
-  }
 
-  //ELECTRON binding
-  changeWindows(){
-    console.log(this.taskService.getTime());
-    this.taskFormGroup.controls['start'].setValue(this.taskService.getTime());
+  startGame(){
+    console.log(new Date());
+    this.taskFormGroup.controls['start'].setValue(new Date());
     this.taskFormGroup.controls['date'].setValue(this.taskService.getDatePiped());
-    this.taskFormGroup.controls['end'].setValue(0);
-    this.datePiped = this.taskService.getDatePiped();
     if (this.taskFormGroup.valid){
       this.taskService.setTaskFormGroup(this.taskFormGroup);
       this.router.navigate(["game"]);

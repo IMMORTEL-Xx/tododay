@@ -1,30 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import * as moment from 'moment';
 
 @Pipe({
   name: 'timePipe'
 })
 export class TimePipe implements PipeTransform {
+  
+  transform(dateStart: Date, dateEnd: Date): string {
+    dateStart = new Date(dateStart);
+    dateEnd = new Date(dateEnd);
 
-  transform(value: number, ...args: unknown[]): string {
-    let result = '';
-    let hours = Math.floor(value/10000).toString();
-    let minutes = Math.floor((value/100)%100).toString();
-    let seconds = Math.floor(value%100).toString();
-
-    if (hours.length == 1){
-      hours = '0' + hours;
-    }
-
-    if (minutes.length == 1){
-      minutes = '0' + minutes;
-    }
-
-    if (seconds.length == 1){
-      seconds = '0' + seconds;
-    }
-    
-    result = hours + ':' + minutes + ':' + seconds;
-    return result;
-
+    let timeInMilliseconds = dateEnd.getTime() - dateStart.getTime();
+    console.log(timeInMilliseconds)
+    let timeInHoursMinutesSeconds = moment.utc(timeInMilliseconds).format('HH:mm:ss');
+    return timeInHoursMinutesSeconds;
   }
 }

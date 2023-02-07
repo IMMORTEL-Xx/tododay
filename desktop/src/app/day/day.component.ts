@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task } from '../models/task.model'
+import { Task } from '../models/task.model';
 import { TaskService } from '../services/task.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -15,21 +15,20 @@ import { TimePipe } from '../pipes/time.pipe';
   styleUrls: ['./day.component.scss']
 })
 export class DayComponent implements OnInit {
-  
+
   taskList!: Task[];
   taskListByDay!: Task[];
   timeLeft!: string;
   showCalendar = false;
-  date : Date = this.taskService.getDate();
-  today : number = this.date.getDate();
+  date = new Date();
+  today: number = this.date.getDate();
   datePiped!: string | null;
-  
-  constructor(private taskService: TaskService){}
 
-  ngOnInit() : void{
-    setInterval(() =>{
-      this.date = this.taskService.getDate();
-      this.today = this.date.getDate();
+  constructor(private taskService: TaskService) { }
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.date = new Date();
     }, 1000);
 
     this.getAllTasks();
@@ -37,51 +36,51 @@ export class DayComponent implements OnInit {
     this.timeLeftMidnight();
   }
 
-  timeLeftMidnight(){
+  timeLeftMidnight() {
     const currentHour = this.date.getHours();
     const currentMinutes = this.date.getMinutes();
 
     const hoursLeft = 23 - currentHour;
     const minutesLeft = 60 - currentMinutes;
 
-    if(minutesLeft < 60){
+    if (minutesLeft < 60) {
       this.timeLeft = `${hoursLeft} h ${minutesLeft} m`;
     }
-    else{
+    else {
       this.timeLeft = `${hoursLeft} h`;
     }
   }
 
-  set dateSelected(value : Date) {
-    
-    if(value.getDate() == this.today ){
+  set dateSelected(value: Date) {
+
+    if (value.getDate() == this.today) {
       this.date = new Date();
       this.timeLeftMidnight();
     }
-    else{
-      this.timeLeft = "24 h"
+    else {
+      this.timeLeft = "24 h";
       this.date = value;
       // this.timeLeft = new Date( 24, 0, 0).toString();
     }
     this.showCalendar = !this.showCalendar;
   }
 
-  getAllTasks(){
-    this.taskService.getAllTasks().subscribe((res: any) =>{
+  getAllTasks() {
+    this.taskService.getAllTasks().subscribe((res: any) => {
       this.taskList = res;
       console.log(this.taskList);
     });
   }
-  
-  getAllTasksByDay(){
+
+  getAllTasksByDay() {
     this.datePiped = this.taskService.getDatePiped();
-    this.taskService.getAllTasksByDay(this.datePiped).subscribe((res: any) =>{
+    this.taskService.getAllTasksByDay(this.datePiped).subscribe((res: any) => {
       this.taskListByDay = res;
       console.log(this.taskListByDay);
     });
   }
 
-  getTimeElapsed(startTime: number, endTime: number){
+  getTimeElapsed(startTime: Date, endTime: Date) {
     // let startStr = startTime.toString();
     // let endStr = endTime.toString();
     // let hoursElapsed = parseInt(endStr.substring(0, 2)) - parseInt(startStr.substring(0, 2));
@@ -89,14 +88,23 @@ export class DayComponent implements OnInit {
     // let secondsElapsed = parseInt(endStr.substring(4)) - parseInt(startStr.substring(4));
     // console.log(hoursElapsed*10000 + minutesElapsed*10000 + secondsElapsed);
     // return hoursElapsed*10000 + minutesElapsed*10000 + secondsElapsed;
-    return endTime - startTime;
+    const diff = startTime.getTime() - endTime.getTime();
+
+    const sec = Math.floor(diff / 1000);
+    const min = Math.floor(sec / 60);
+    const hour = Math.floor(min / 60);
+
+    console.log(hour + ':' + min % 60 + ':' + sec % 60);
+    return hour + ':' + min % 60 + ':' + sec % 60
+    // console.log("okok");
+    // return endTime - startTime;
   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.taskListByDay, event.previousIndex, event.currentIndex);
   }
 
-  
+
 
   // changeTitle(): void {
   //   window.electronAPI.setTitle("VAMOS A LA PLAYA");

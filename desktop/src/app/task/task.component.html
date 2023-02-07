@@ -1,4 +1,4 @@
-<form [formGroup]="taskFormGroup" (ngSubmit)="onAddTask()">
+<form [formGroup]="taskFormGroup" (ngSubmit)="startGame()">
   <!-- <div>
     <input type="date" formControlName="date">
   </div> -->
@@ -10,11 +10,7 @@
     </p>
   </div>
   
-  
-  <button type="submit" mat-raised-button color="primary">
-    ADD TASK
-  </button>
-  <button  type="submit" (click)="changeWindows()" mat-raised-button color="primary">
+  <button  type="submit" mat-raised-button color="primary">
     START
   </button>
   <!-- (click)="onAddTask()" -->
