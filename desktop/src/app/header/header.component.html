@@ -11,7 +11,8 @@
         </button>
     </div>
     <div>
-        <button routerLink="/login" mat-raised-button>Login</button>
-        <button routerLink="/register" mat-raised-button>Register</button>
+        <button *ngIf="!connected" routerLink="/login" mat-raised-button>Login</button>
+        <button *ngIf="!connected" routerLink="/register" mat-raised-button>Register</button>
+        <button *ngIf="connected" (click)="logout()" routerLink="/login" mat-raised-button>Logout</button>
     </div>
 </mat-toolbar>

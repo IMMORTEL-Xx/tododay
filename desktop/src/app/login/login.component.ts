@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   keyPress = false;
   userNotExist = false;
+  connected = false
 
   constructor(private fb: FormBuilder,
               private router: Router,

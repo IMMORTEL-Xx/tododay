@@ -11,6 +11,7 @@ import { Token } from '../models/token.model';
 export class LoginService {
 
   private url : string = environment.url;
+  connection = false;
 
   constructor(private http: HttpClient) { }
 

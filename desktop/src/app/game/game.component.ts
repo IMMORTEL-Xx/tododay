@@ -26,10 +26,14 @@ export class GameComponent implements OnDestroy {
   sec: number = 0;
   min: number = 0;
   zeroSec: string = "0";
-  coinSec: number = 10; //300
+
+  secCoinsWin: number = 5; //300
+  coinsTimeElapsed: number = 10;
+  coinsDistraction: number = 1;
+  
   secModulo!: number;
   progress: number = 0;
-  progressSec: number = 100 / this.coinSec;
+  progressSec: number = 100 / this.secCoinsWin;
   coinInterval: any;
   deepBackground = false;
   taskFormGroup!: FormGroup;
@@ -45,12 +49,13 @@ export class GameComponent implements OnDestroy {
   }
 
   changeProgress() {
-    (this.sec < this.coinSec) ? this.sec += 1 : this.sec = 1;
+    (this.sec < this.secCoinsWin) ? this.sec += 1 : this.sec = 1;
     (this.progress < 100) ? this.progress += this.progressSec : this.progress = this.progressSec;
-    if (this.sec >= this.coinSec) {
+    if (this.sec >= this.secCoinsWin) {
       this.audioCoin.play();
       this.runGif(this.srcCoin);
-      this.taskFormGroup.controls['coins'].setValue(this.taskFormGroup.controls['coins'].value + 1);
+      this.taskFormGroup.controls['coins'].setValue(
+        this.taskFormGroup.controls['coins'].value + this.coinsTimeElapsed);
     }
     this.min = Math.floor(this.sec / 60);
     this.secModulo = this.sec % 60;

@@ -19,19 +19,27 @@
     <img src="assets/todolist.png" alt="todolist">
   </button>
 
-  <h1>All tasks</h1>
+  <!-- <h1>All tasks</h1>
   <li *ngFor="let task of taskList">
     {{ task.start }}
     {{ task.name }}
     {{ task.end }}
-  </li>
+  </li> -->
   <h1>All tasks this day</h1>
   <div class="example-box" *ngFor="let taskDay of taskListByDay">
     <h1>{{ taskDay.start | date: 'HH:mm:ss '}}</h1>
-    <h1>{{ taskDay.name }}</h1>
-    <h1>{{ taskDay.start | timePipe: taskDay.end}}</h1>
-    <h1 >{{ taskDay.distractions ? taskDay.distractions.length : 0 }}</h1>
-    <h1 >{{ taskDay.coins }}</h1>
+    <div class="score flex justify-content-between">
+      <h1>{{ taskDay.name }}</h1>
+      <h1 >{{ taskDay.start | timePipe: taskDay.end}}</h1>
+      <h1>
+        <img src="assets/arrowIcon.png" alt="arrowIcon">
+        {{ taskDay.distractions ? taskDay.distractions.length : 0 }}
+      </h1>
+      <h1>
+        <img src="assets/coinIcon.png" alt="coinIcon">
+        {{ taskDay.distractions ? taskDay.coins - taskDay.distractions.length : taskDay.coins }}
+      </h1>
+    </div>
     <h1>{{ taskDay.end | date: 'HH:mm:ss'}}</h1>
   </div>
   <!-- <div *ngFor="let taskDay of taskListByDay">
