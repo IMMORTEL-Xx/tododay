@@ -32,11 +32,11 @@ export class TaskComponent implements OnInit {
 
   get f() { return this.taskFormGroup.controls; }
 
-
   startGame(){
-    console.log(new Date());
+
     this.taskFormGroup.controls['start'].setValue(new Date());
     this.taskFormGroup.controls['date'].setValue(this.taskService.getDatePiped());
+
     if (this.taskFormGroup.valid){
       this.taskService.setTaskFormGroup(this.taskFormGroup);
       this.router.navigate(["game"]);
@@ -45,6 +45,6 @@ export class TaskComponent implements OnInit {
     else{
       console.log("Invalid form");
     }
-    
   }
+  
 }

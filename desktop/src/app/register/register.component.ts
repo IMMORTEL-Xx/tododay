@@ -22,7 +22,6 @@ export class RegisterComponent {
   hide2 = true;
   keyPress = false;
   emailExist = false;
-  //errorMsg: string = "Email is already registred"
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -50,7 +49,6 @@ export class RegisterComponent {
       this.registerService.register(this.registerFormGroup.value).subscribe(
         {
           next: () => {
-            console.log("okok");
             this.router.navigate(["login"]);
           },
           error: () => {
@@ -85,24 +83,6 @@ export class RegisterComponent {
     }
   }
 
-  existValidator(email: string){
-    return (formGroup: FormGroup) => {
-      const emailCtrl = formGroup.controls[email];
-
-      if(emailCtrl.errors) {
-        return
-      }
-
-      if(this.emailExist) {
-        emailCtrl.setErrors({existValidator: true})
-      }
-      else{
-        emailCtrl.setErrors(null);
-      }
-    }
-  }
-
-
   focusNextInput(event: Event) {
     event.preventDefault();
     [this.hide, this.hide2] = [true, true];
@@ -111,14 +91,17 @@ export class RegisterComponent {
 
   keyDown(event: Event, text: string){
     [this.hide, this.hide2] = [true, true];
+
     if(text == 'register'){
       event.preventDefault();
     }
+
     this.keyPress = true;
   }
 
   keyUp(text: string) {
     [this.hide, this.hide2] = [true, true];
+
     if (this.keyPress) {
         if(text == 'register'){
           this.onRegister()

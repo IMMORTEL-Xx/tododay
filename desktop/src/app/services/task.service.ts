@@ -25,25 +25,14 @@ export class TaskService {
   getDatePiped(){
     return this.datePipe.transform(this.getDate(), "yyyy-MM-dd");
   }
-  
-  getTimee(){
-    // let date = this.getDate();
-    // let hours = date.getHours();
-    // let minutes = date.getMinutes();
-    // let seconds = date.getSeconds();
-    // return hours*10000 + minutes*100 + seconds;
-    return this.getDate();
-  }
 
   getAllTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.url + 'task')
   }
 
-  // PAS FINI
   getAllTasksByDay(date: String | null): Observable<Task[]> {
     return this.http.get<Task[]>(this.url + 'task/' + date)
   }
-  //
 
   addTask(task: Task): Observable<Task[]> {
     return this.http.post<Task[]>(this.url + 'task', task)
@@ -57,6 +46,5 @@ export class TaskService {
     return this.taskFormGroup;
   }
 
-  
 }
 

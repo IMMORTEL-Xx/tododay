@@ -24,10 +24,7 @@ export class TokenService {
     return !! token;
   }
 
-
   getToken(): string | null{
-
-
     return localStorage.getItem('token');
   }
 

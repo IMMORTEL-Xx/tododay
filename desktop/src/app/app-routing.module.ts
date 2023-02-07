@@ -14,7 +14,6 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "day", component: DayComponent, canActivate: [LoginGuard]},
-  {path: "task", component: TaskComponent, canActivate: [LoginGuard]},
   {path: "game", component: GameComponent, canActivate: [LoginGuard]},
   {path: "**", component: NotFoundComponent}
 ];

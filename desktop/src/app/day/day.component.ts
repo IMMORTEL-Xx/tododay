@@ -81,13 +81,6 @@ export class DayComponent implements OnInit {
   }
 
   getTimeElapsed(startTime: Date, endTime: Date) {
-    // let startStr = startTime.toString();
-    // let endStr = endTime.toString();
-    // let hoursElapsed = parseInt(endStr.substring(0, 2)) - parseInt(startStr.substring(0, 2));
-    // let minutesElapsed = parseInt(endStr.substring(2, 4)) - parseInt(startStr.substring(2, 4));
-    // let secondsElapsed = parseInt(endStr.substring(4)) - parseInt(startStr.substring(4));
-    // console.log(hoursElapsed*10000 + minutesElapsed*10000 + secondsElapsed);
-    // return hoursElapsed*10000 + minutesElapsed*10000 + secondsElapsed;
     const diff = startTime.getTime() - endTime.getTime();
 
     const sec = Math.floor(diff / 1000);
@@ -96,21 +89,10 @@ export class DayComponent implements OnInit {
 
     console.log(hour + ':' + min % 60 + ':' + sec % 60);
     return hour + ':' + min % 60 + ':' + sec % 60
-    // console.log("okok");
-    // return endTime - startTime;
   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.taskListByDay, event.previousIndex, event.currentIndex);
   }
-
-
-
-  // changeTitle(): void {
-  //   window.electronAPI.setTitle("VAMOS A LA PLAYA");
-  //   window.electronAPI.setXPosition(300);
-  // }
-
-
 
 }

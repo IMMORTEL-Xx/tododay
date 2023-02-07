@@ -30,7 +30,7 @@ export class GameComponent implements OnDestroy {
   secCoinsWin: number = 5; //300
   coinsTimeElapsed: number = 10;
   coinsDistraction: number = 1;
-  
+
   secModulo!: number;
   progress: number = 0;
   progressSec: number = 100 / this.secCoinsWin;
@@ -42,8 +42,8 @@ export class GameComponent implements OnDestroy {
     private taskService: TaskService) { }
 
   ngOnInit(): void {
-    this.audioCoin.src = './assets/coinSound.mp3';
-    this.audioArrow.src= './assets/error.mp3';
+    this.audioCoin.src = './assets/coinWin.mp3';
+    this.audioArrow.src= './assets/distraction.mp3';
     this.taskFormGroup = this.taskService.getTaskFormGroup();
     this.start();
   }
@@ -87,7 +87,6 @@ export class GameComponent implements OnDestroy {
   onAddDistraction() {
     this.audioArrow.play();
     this.runGif(this.srcArrow);
-    //(this.taskFormGroup.controls['distraction'] as FormArray).push(new Date());
     this.taskFormGroup.get("distractions")?.value.push(new Date());
     console.log("Distraction Added");
   }

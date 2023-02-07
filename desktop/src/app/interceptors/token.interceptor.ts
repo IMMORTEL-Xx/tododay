@@ -18,14 +18,13 @@ export class TokenInterceptor implements HttpInterceptor {
     
     const token = this.tokenService.getToken()
     
-    // SI token à insérer dans le header
+    //insérer toker dans le header
     if(token !== null){
       let clone = request.clone({
         headers: request.headers.set('Authorization', 'bearer '+token)
       })
       return next.handle(clone) 
     }
-    
     
     return next.handle(request);
   }

@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-
   logout(){
     this.tokenService.clearToken();
     this.connected = false;
